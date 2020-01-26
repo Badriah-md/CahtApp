@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+          <ion-button routerLink="/chats" >
+            <ion-icon name="arrow-round-back"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+    <ion-title>New Chat</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-list>
+  <ion-item >
+    <ion-input placeholder="Group Name" [(ngModel)]="title"></ion-input>
+  </ion-item>
+  <ion-item-divider>
+    <ion-label>Members</ion-label>
+  </ion-item-divider>
+
+  <ion-item>
+    <ion-input placeholder="Nick Name / Email" [(ngModel)]="participent"></ion-input>
+  </ion-item>
+
+  <ion-col size="3" offset="4">
+  <ion-button (click)="addUser()" color="secondary" expanded="block" id="move">Add user</ion-button>
+</ion-col>
+  <ion-item *ngFor = "let usr of users">
+    <ion-label>{{usr.email}}
+    <p>{{usr.nickname}}</p></ion-label>
+  </ion-item>
+</ion-list>
+</ion-content>
+
+<ion-footer>
+<ion-toolbar color="primary">
+  <ion-button color="light" expand="full" fill="clear" [disabled]="title == '' || users.length==0"
+  (click)="createGroup()">start Groups</ion-button>
+</ion-toolbar>
+</ion-footer>

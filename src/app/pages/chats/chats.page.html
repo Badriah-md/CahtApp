@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="signOut()">
+        <ion-icon name="log-out" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>chats</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+
+<ion-list>
+  <ion-item button  *ngFor="let group of groubs | async" [routerLink]="['/','chat',(group | async)?.id || 0]">
+    <ion-label text-wrap>
+<ion-text color="primary">
+  <h3>{{(group | async)?.title}}</h3>
+</ion-text>
+<p>{{(group | async)?.users.length}} users </p>
+    </ion-label>
+  </ion-item>
+
+</ion-list>
+
+  <ion-fab vertical="bottom" horizontal ="end" slot ="fixed">
+<ion-fab-button (click)='go()' >
+<ion-icon name="add"></ion-icon></ion-fab-button>
+</ion-fab>
+</ion-content>

@@ -1,0 +1,29 @@
+
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+ 
+<ion-content padding>
+    
+ 
+  <form (ngSubmit)="login()" [formGroup]="loginForm" class="top">
+    <ion-list>
+      <ion-item>
+        <ion-input type="email" placeholder="Email" name="email" formControlName="email"></ion-input>
+      </ion-item>
+ 
+      <ion-item>
+        <ion-input type="password" placeholder="Password" name="password" formControlName="password"></ion-input>
+      </ion-item>
+ 
+    </ion-list>
+ 
+    <ion-button color="primary" expand="full" type="submit" [disabled]="!loginForm.valid">Login</ion-button>    
+  </form>
+ 
+  <ion-button color="secondary" fill="clear" routerLink="/register">Create Account</ion-button>
+  <ion-button color="danger" fill="clear" (click)="openReset()">Reset Password</ion-button>
+ 
+</ion-content>

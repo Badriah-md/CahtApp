@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar color="primary">
+
+     <ion-buttons slot="start">
+          <ion-button routerLink="/chats" >
+            <ion-icon name="arrow-round-back"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+
+  
+    <ion-title>{{ chat?.title }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="danger" fill="clear" (click)="leave()">
+        Leave Chat
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+ 
+<ion-content padding>
+ 
+  <ion-grid>
+    <ion-row *ngFor="let message of messages | async">
+      <ion-col size="9" size-md="6" *ngIf="message.from !== currentUserId" class="message other-message">
+        <b>{{ message.user }}</b><br>
+        <span>{{ message.msg }}
+          <img [src]="message.file" *ngIf="message.file">
+        </span>
+ 
+        <div class="time" text-right><br>{{ message.createdAt.toMillis() | date:'short' }}</div>
+      </ion-col>
+ 
+      <ion-col offset="3" offset-md="6" size="9" size-md="6" *ngIf="message.from === currentUserId" class="message my-message">
+        <b>{{ message.user }}</b><br>
+        <span>{{ message.msg }}
+          <img [src]="message.file" *ngIf="message.file">
+        </span>
+        <div class="time" text-right><br>{{ message.createdAt.toMillis() | date:'short' }}</div>
+      </ion-col>
+ 
+    </ion-row>
+  </ion-grid>
+ 
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="sendFile()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+ 
+</ion-content>
+ 
+<ion-footer>
+  <ion-toolbar color="light">
+    <ion-row no-padding align-items-center>
+      <ion-col size="10">
+        <textarea class="message-input" #input rows="1" maxLength="500" (keyup)="resize()" [(ngModel)]="newMsg"></textarea>
+      </ion-col>
+      <ion-col size="2" text-center>
+        <ion-button expand="block" fill="clear" color="primary" [disabled]="newMsg === ''" class="msg-btn" (click)="sendMessage()">
+          <ion-icon name="ios-send" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>
